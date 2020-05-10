@@ -67,7 +67,7 @@ namespace TodoApp.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(TodoModel model)
+        public async Task<ActionResult> Edit(TodoModel editModel)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace TodoApp.Web.Controllers
                 return View("Error", new ErrorViewModel());
             }
 
-            var dbTodo = _mapper.Map<Todo>(model);
+            var dbTodo = _mapper.Map<Todo>(editModel);
             try
             {
                 await _todoService.Edit(dbTodo);
