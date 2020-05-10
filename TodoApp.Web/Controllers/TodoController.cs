@@ -65,5 +65,21 @@ namespace TodoApp.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(TodoModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogInformation("invalid form was submitted");
+                return View("Error", new ErrorViewModel());
+            }
+
+            var dbTodo = _mapper.Map<Todo>(model);
+            await _todoService.Edit(dbTodo);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

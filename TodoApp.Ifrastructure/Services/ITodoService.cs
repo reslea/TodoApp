@@ -11,5 +11,6 @@ namespace TodoApp.Ifrastructure.Services
         Task<IEnumerable<Todo>> GetAllAsync();
 
         Task Create(Todo dbTodo);
+        Task Edit(Todo dbTodo);
     }
 }
