@@ -20,7 +20,7 @@ namespace TodoApp.Tests
         public async void ServiceReturnsAllRequestedItems()
         {
             mockTodoRepository
-                .Setup(r => r.Get(It.IsAny<Func<Todo, bool>>()))
+                .Setup(r => r.Get())
                 .Returns(Task.FromResult(todoItems.AsEnumerable()));
 
             var serviceToTest = new TodoService(mockTodoRepository.Object);
