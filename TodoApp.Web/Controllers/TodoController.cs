@@ -76,8 +76,15 @@ namespace TodoApp.Web.Controllers
             }
 
             var dbTodo = _mapper.Map<Todo>(model);
-            await _todoService.Edit(dbTodo);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _todoService.Edit(dbTodo);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
 
             return RedirectToAction(nameof(Index));
         }
